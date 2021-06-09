@@ -8,7 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Miwok">
+        android:theme="@style/Theme.AppCompat.Light">
+        <activity android:name=".miwok.ColorsActivity"></activity>
+        <activity android:name=".miwok.FamilyActivity" />
+        <activity android:name=".miwok.NumbersActivity" />
+        <activity android:name=".miwok.PhrasesActivity" />
         <activity android:name=".miwok.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
