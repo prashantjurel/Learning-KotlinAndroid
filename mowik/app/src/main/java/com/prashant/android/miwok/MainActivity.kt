@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         colorsBtn = findViewById(R.id.colors)
         phrasesBtn = findViewById(R.id.phrases)
 
+
         numbersBtn.setOnClickListener{
             val intent = Intent(this,NumbersActivity::class.java)
             startActivity(intent)
