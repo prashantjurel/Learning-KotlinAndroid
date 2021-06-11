@@ -8,7 +8,7 @@ import com.prashant.android.R
 class NumbersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_numbers)
+        setContentView(R.layout.words_list)
 
         val numbersList = arrayListOf<Word>()
         numbersList.add(Word("lutti","one"))
