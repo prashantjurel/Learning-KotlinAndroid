@@ -22,7 +22,7 @@ class FamilyActivity : AppCompatActivity() {
         numbersList.add(Word("ama","grandmother",R.drawable.family_grandmother))
         numbersList.add(Word("pappa","grandfather",R.drawable.family_grandfather))
 
-        val itemAdapter = WordAdapter(this, numbersList)
+        val itemAdapter = WordAdapter(this, numbersList,R.color.category_family)
 
         val listView = findViewById<ListView>(R.id.list)
         listView.adapter = itemAdapter

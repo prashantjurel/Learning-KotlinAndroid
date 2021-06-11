@@ -22,7 +22,7 @@ class PhrasesActivity : AppCompatActivity() {
         numbersList.add(Word("yoowutis","Let’s go."))
         numbersList.add(Word("әnni'nem","Come here."))
 
-        val itemAdapter = WordAdapter(this, numbersList)
+        val itemAdapter = WordAdapter(this, numbersList,R.color.category_phrases)
 
         val listView = findViewById<ListView>(R.id.list)
         listView.adapter = itemAdapter

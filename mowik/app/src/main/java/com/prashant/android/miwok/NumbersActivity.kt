@@ -22,7 +22,7 @@ class NumbersActivity : AppCompatActivity() {
         numbersList.add(Word("wo’e","nine",R.drawable.number_nine))
         numbersList.add(Word("na’aacha","ten",R.drawable.number_ten))
 
-        val itemAdapter = WordAdapter(this, numbersList)
+        val itemAdapter = WordAdapter(this, numbersList,R.color.category_numbers)
 
         val listView = findViewById<ListView>(R.id.list)
         listView.adapter = itemAdapter

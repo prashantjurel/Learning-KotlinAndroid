@@ -8,11 +8,14 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.prashant.android.R
 
-class WordAdapter(context: Activity, numbersList: ArrayList<Word>) : ArrayAdapter<Word>(context,0,numbersList) {
+class WordAdapter(context: Activity, numbersList: ArrayList<Word>, colorResource:Int) : ArrayAdapter<Word>(context,0,numbersList) {
 
+    var mcolorResource = colorResource
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val listItemView = convertView ?: run {
             val inflater = LayoutInflater.from(context)
@@ -29,6 +32,9 @@ class WordAdapter(context: Activity, numbersList: ArrayList<Word>) : ArrayAdapte
             }
             else
                 listItemView.findViewById<ImageView?>(R.id.mowik_image_view)?.visibility = GONE
+
+        var color = ContextCompat.getColor(context,mcolorResource)
+        listItemView.findViewById<LinearLayout?>(R.id.text_container).setBackgroundColor(color)
 
             return listItemView
         }
