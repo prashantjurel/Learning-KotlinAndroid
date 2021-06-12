@@ -41,4 +41,10 @@
             tools:text="one" />
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
+        android:src="@drawable/play_button"
+        />
+
 </LinearLayout>
