@@ -10,8 +10,10 @@ import com.prashant.android.R
 class NumbersActivity : AppCompatActivity() {
 
     private var mediaPlayer: MediaPlayer = MediaPlayer().apply {
-        setOnPreparedListener { start() }
-        setOnCompletionListener { reset() }
+        setOnCompletionListener {
+            reset()
+            release()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +37,16 @@ class NumbersActivity : AppCompatActivity() {
         val listView = findViewById<ListView>(R.id.list)
         listView.adapter = itemAdapter
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            mediaPlayer.reset()
+            mediaPlayer?.release()
             mediaPlayer = MediaPlayer.create(this, numbersList[position].audio)
             mediaPlayer.start()
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer.stop()
+        mediaPlayer?.reset()
+        mediaPlayer?.release()
     }
 }
