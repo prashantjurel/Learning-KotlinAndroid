@@ -15,7 +15,7 @@ import com.prashant.android.R
 
 class WordAdapter(context: Activity, numbersList: ArrayList<Word>, colorResource:Int) : ArrayAdapter<Word>(context,0,numbersList) {
 
-    var mcolorResource = colorResource
+    private var mColorResource = colorResource
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val listItemView = convertView ?: run {
             val inflater = LayoutInflater.from(context)
@@ -33,7 +33,7 @@ class WordAdapter(context: Activity, numbersList: ArrayList<Word>, colorResource
             else
                 listItemView.findViewById<ImageView?>(R.id.mowik_image_view)?.visibility = GONE
 
-        var color = ContextCompat.getColor(context,mcolorResource)
+        val color = ContextCompat.getColor(context,mColorResource)
         listItemView.findViewById<LinearLayout?>(R.id.text_container).setBackgroundColor(color)
 
             return listItemView

@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.prashant.android.R
 
 class ColorsActivity : AppCompatActivity() {
-    private lateinit var mediaPlayer: MediaPlayer
+    private var mediaPlayer: MediaPlayer = MediaPlayer().apply {
+        setOnPreparedListener { start() }
+        setOnCompletionListener { reset() }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.words_list)
@@ -26,9 +29,11 @@ class ColorsActivity : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.list)
         listView.adapter = itemAdapter
-        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            mediaPlayer.reset()
             mediaPlayer = MediaPlayer.create(this, numbersList[position].audio)
             mediaPlayer.start()
+            mediaPlayer.setOnCompletionListener { mediaPlayer.release() }
         }
     }
 }
