@@ -8,8 +8,8 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.prashant.android.R
 
@@ -34,7 +34,7 @@ class WordAdapter(context: Activity, numbersList: ArrayList<Word>, colorResource
                 listItemView.findViewById<ImageView?>(R.id.mowik_image_view)?.visibility = GONE
 
         val color = ContextCompat.getColor(context,mColorResource)
-        listItemView.findViewById<LinearLayout?>(R.id.text_container).setBackgroundColor(color)
+        listItemView.findViewById<ConstraintLayout?>(R.id.text_container).setBackgroundColor(color)
 
             return listItemView
         }

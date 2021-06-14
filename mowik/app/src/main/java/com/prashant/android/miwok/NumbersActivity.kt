@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit
 class NumbersActivity : AppCompatActivity() {
 
     private var mediaPlayer: MediaPlayer = MediaPlayer().apply {
+        setOnPreparedListener{ start() }
         setOnCompletionListener {
             reset()
             release()
@@ -40,7 +41,7 @@ class NumbersActivity : AppCompatActivity() {
                 // Wait 30 seconds before stopping playback
                 handler.postDelayed(delayedStopRunnable, TimeUnit.SECONDS.toMillis(30))
             }
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK -> {
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK -> {
                 // Pause playback
                 mediaPlayer.pause()
                 mediaPlayer.seekTo(0)
@@ -52,7 +53,6 @@ class NumbersActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,8 +71,7 @@ class NumbersActivity : AppCompatActivity() {
                 setOnAudioFocusChangeListener(afChangeListener, handler)
                 build()
             }
-        }
-        else{
+        } else {
             // Request audio focus for playback
             val result: Int = audioManager.requestAudioFocus(
                 afChangeListener,
@@ -119,7 +118,8 @@ class NumbersActivity : AppCompatActivity() {
                     // Use the music stream.
                     AudioManager.STREAM_MUSIC,
                     // Request permanent focus.
-                    AudioManager.AUDIOFOCUS_GAIN)
+                    AudioManager.AUDIOFOCUS_GAIN
+                )
             }
             synchronized(focusLock) {
                 playbackNowAuthorized = when (res) {
@@ -146,8 +146,7 @@ class NumbersActivity : AppCompatActivity() {
         mediaPlayer.release()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             audioManager.abandonAudioFocusRequest(focusRequest)
-        }
-        else{
+        } else {
             audioManager.abandonAudioFocus(afChangeListener)
         }
     }
