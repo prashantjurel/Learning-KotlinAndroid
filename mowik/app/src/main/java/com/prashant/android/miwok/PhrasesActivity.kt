@@ -55,7 +55,7 @@ class PhrasesActivity : AppCompatActivity() {
         val listView = findViewById<ListView>(R.id.list)
         listView.adapter = itemAdapter
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            mediaPlayer?.release()
+            mediaPlayer.release()
             mediaPlayer = MediaPlayer.create(this, numbersList[position].audio)
             mediaPlayer.start()
         }
@@ -64,7 +64,7 @@ class PhrasesActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         mediaPlayer.stop()
-        mediaPlayer?.reset()
-        mediaPlayer?.release()
+        mediaPlayer.reset()
+        mediaPlayer.release()
     }
 }
