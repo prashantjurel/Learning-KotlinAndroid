@@ -18,6 +18,7 @@ package com.example.android.dessertpusher
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var dessertTimer: DessertTimer
 
     /** Dessert Data **/
 
@@ -64,6 +67,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("MainActivity","onCreate")
 
         // Use Data Binding to get reference to the views
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -71,6 +75,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         binding.dessertButton.setOnClickListener {
             onDessertClicked()
         }
+
+        dessertTimer= DessertTimer(this.lifecycle)
 
         // Set the TextViews to the right values
         binding.revenue = revenue
@@ -145,5 +151,30 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
             R.id.shareMenuButton -> onShare()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("MainActivity","onStart")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("MainActivity","onPause")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("MainActivity","onDestroy")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("MainActivity","onStop")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("MainActivity","onResume")
     }
 }
