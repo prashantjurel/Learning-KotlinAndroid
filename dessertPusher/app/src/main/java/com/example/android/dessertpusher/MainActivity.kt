@@ -18,6 +18,7 @@ package com.example.android.dessertpusher
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -27,6 +28,10 @@ import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleObserver
 import com.example.android.dessertpusher.databinding.ActivityMainBinding
+
+const val KEY_REVENUE = "key_revenue"
+const val DESSERT_SOLD = "dessert_sold"
+const val DESSERT_TIMER = "dessert_timer"
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
 
@@ -77,6 +82,12 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         }
 
         dessertTimer= DessertTimer(this.lifecycle)
+
+        if (savedInstanceState != null) {
+            revenue = savedInstanceState.getInt(KEY_REVENUE, 0)
+            dessertsSold = savedInstanceState.getInt(DESSERT_SOLD, 0)
+            dessertTimer.secondsCount = savedInstanceState.getInt(DESSERT_TIMER, 0)
+        }
 
         // Set the TextViews to the right values
         binding.revenue = revenue
@@ -151,6 +162,16 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
             R.id.shareMenuButton -> onShare()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putInt(KEY_REVENUE,revenue)
+        outState.putInt(DESSERT_SOLD,dessertsSold)
+        outState.putInt(DESSERT_TIMER,dessertTimer.secondsCount)
+    }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun onStart() {
